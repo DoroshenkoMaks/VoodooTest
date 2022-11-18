@@ -57,6 +57,35 @@ h1 {
   grid-column-end: 1;
 }
 
+/* Map info window */
+.info-window {
+  width: 250px;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #fff;
+}
+.info-window__heading {
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.info-window__address {
+  margin-bottom: 10px;
+}
+.info-window__contact {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.info-window__contact:last-of-type {
+  margin-bottom: 0;
+}
+.info-window__contact p {
+  color: #858585;
+}
+.info-window__contact svg {
+  margin: 0 10px;
+}
+
 @media (max-width: 1140px) {
   .wrapper {
     padding: 0 20px;

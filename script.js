@@ -1,3 +1,82 @@
+// Custom select
+// Choose all selects
+const selects = document.querySelectorAll("select");
+
+// Loop over them
+for (let i = 0; i < selects.length; i++) {
+  const select = selects[i];
+  // Select options
+  const options = select.querySelectorAll("option");
+  const selectClass = select.className;
+
+  // Create custom select
+  const customSelect = document.createElement("div");
+  const customSelectList = document.createElement("div");
+  const customSelectCurrent = document.createElement("div");
+
+  // Set className
+  customSelect.className = `${selectClass} form__select--custom custom-select`;
+  customSelectList.className = "custom-select__list custom-scrollbar";
+  customSelectCurrent.className = "custom-select__current";
+
+  // Put List inside
+  customSelect.append(customSelectCurrent, customSelectList);
+
+  // Set customSelect after original select
+  select.after(customSelect);
+
+  // Get "option" values ​​from "select", then create custom "option" for custom "select"
+  const createCustomDom = (x, y) => {
+    let selectItems = "";
+    for (var i = 0; i < options.length; i++) {
+      selectItems += `<div class="custom-select__item" data-value="${options[i].value}">${options[i].text}</div>`;
+    }
+    customSelectList.innerHTML = selectItems;
+    x(), y();
+  };
+
+  // Open and close select
+  const toggleClass = () => {
+    customSelect.classList.toggle("custom-select--show");
+  };
+
+  // Placeholders for custom select
+  const placeholder = [
+    "Practice / Institution*",
+    "Medical Profession*",
+    "Type of Inquiry*",
+  ];
+  const currentTextValue = () =>
+    (customSelectCurrent.textContent = placeholder[i]);
+
+  // Get and set text/value
+  const currentValue = () => {
+    const items = customSelectList.children;
+
+    for (var el = 0; el < items.length; el++) {
+      let selectValue = items[el].getAttribute("data-value");
+      let selectText = items[el].textContent;
+
+      items[el].addEventListener("click", () => {
+        customSelect.classList.remove("custom-select--show");
+        customSelectCurrent.style.color = "#000";
+        customSelectCurrent.textContent = selectText;
+        select.value = selectValue;
+      });
+    }
+  };
+
+  customSelectCurrent.addEventListener("click", toggleClass);
+
+  createCustomDom(currentTextValue, currentValue);
+
+  // Close the dropdown list on click outside select area
+  document.addEventListener("mouseup", (e) => {
+    if (!customSelect.contains(e.target))
+      customSelect.classList.remove("custom-select--show");
+  });
+}
+
 // Google Map
 function initMap() {
   // Styling map
